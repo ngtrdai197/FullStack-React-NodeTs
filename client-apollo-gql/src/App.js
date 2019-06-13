@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Route } from 'react-router-dom';
 import Login from './components/auth/login/login';
 import SignUp from './components/auth/signup/signup';
 
@@ -12,10 +12,10 @@ function App() {
         <header className="app-header">
           <ul className="d-flex justify-content-end mr-5">
             <li>
-              <Link to="/auth/login">Login</Link>
+              <NavLink to="/auth/login" activeClassName="active">Login</NavLink>
             </li>
             <li>
-              <Link to="/auth/sign-up">Sign up</Link>
+              <NavLink to="/auth/sign-up">Sign up</NavLink>
             </li>
           </ul>
         </header>
