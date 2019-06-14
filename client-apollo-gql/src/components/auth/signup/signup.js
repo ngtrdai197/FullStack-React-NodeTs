@@ -8,7 +8,8 @@ class SignUp extends Component {
         this.state = {
             username: '',
             password: '',
-            fullname: ''
+            fullname: '',
+            email: ''
         }
         this.handleChange = this.handleChange;
     }
@@ -17,10 +18,9 @@ class SignUp extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        const { username, password, fullname } = this.state;
-        const user = {
-            
-        }
+        const { username, password, fullname, email } = this.state;
+        const user = { username, password, fullname, email };
+        this.props.createUser(user);
     }
 
     render() {
@@ -49,6 +49,13 @@ class SignUp extends Component {
                                         <span className="input-group-text" id="addon-wrapping">@</span>
                                     </div>
                                     <input type="text" name="fullname" className="form-control" placeholder="FullName" onChange={this.handleChange}></input>
+                                </div>
+                                <br></br>
+                                <div className="input-group flex-nowrap">
+                                    <div className="input-group-prepend">
+                                        <span className="input-group-text" id="addon-wrapping">@</span>
+                                    </div>
+                                    <input type="text" name="email" className="form-control" placeholder="Email" onChange={this.handleChange}></input>
                                 </div>
                                 <br></br>
                                 <button type="submit" className="btn btn-block btn-primary">Register</button>
