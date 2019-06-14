@@ -8,8 +8,8 @@ class SignUp extends Component {
         this.state = {
             username: '',
             password: '',
-            fullname: '',
-            email: ''
+            fullName: '',
+            email: '',
         }
         this.handleChange = this.handleChange;
     }
@@ -18,12 +18,13 @@ class SignUp extends Component {
     }
     handleSubmit = (event) => {
         event.preventDefault();
-        const { username, password, fullname, email } = this.state;
-        const user = { username, password, fullname, email };
+        const { username, password, fullName, email } = this.state;
+        const user = { username, password, fullName, email };
         this.props.createUser(user);
     }
 
     render() {
+        const { error } = this.props;
         return (
             <div>
                 <div className="container">
@@ -36,7 +37,7 @@ class SignUp extends Component {
                                     </div>
                                     <input type="text" name="username" className="form-control" placeholder="Username" onChange={this.handleChange}></input>
                                 </div>
-                                <br></br>
+                                {error ? <div className="alert alert-danger">{error.message}</div> : ''}
                                 <div className="input-group flex-nowrap">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="addon-wrapping">@</span>
@@ -48,7 +49,7 @@ class SignUp extends Component {
                                     <div className="input-group-prepend">
                                         <span className="input-group-text" id="addon-wrapping">@</span>
                                     </div>
-                                    <input type="text" name="fullname" className="form-control" placeholder="FullName" onChange={this.handleChange}></input>
+                                    <input type="text" name="fullName" className="form-control" placeholder="FullName" onChange={this.handleChange}></input>
                                 </div>
                                 <br></br>
                                 <div className="input-group flex-nowrap">
@@ -68,8 +69,14 @@ class SignUp extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ createUser: createUser }, dispatch);
+const mapStateToProps = (state) => {
+    const { error, user } = state.userReducer;
+    return { user, error }
 };
 
-export default SignUp = connect(mapDispatchToProps)(SignUp);
+const mapDispatchToProps = dispatch => {
+    return bindActionCreators({ createUser }, dispatch);
+};
+
+
+export default SignUp = connect(mapStateToProps, mapDispatchToProps)(SignUp);

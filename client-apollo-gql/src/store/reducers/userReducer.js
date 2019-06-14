@@ -1,11 +1,18 @@
-import { CREATE_USER } from '../actions/types';
+import { CREATE_USER, CREATE_USER_FAIL } from '../actions/types';
 
-export default (state = {}, action) => {
+const initialState = {
+    user: {},
+    error: {}
+}
+
+export default (state = initialState, action) => {
     switch (action.type) {
         case CREATE_USER:
-            console.log(action);
-            return action.payload;
+            return { ...state, user: action.payload };
+        case CREATE_USER_FAIL:
+            const result = { ...state, error: action.payload }
+            return result;
         default:
-            state;
+            return state;
     }
 }

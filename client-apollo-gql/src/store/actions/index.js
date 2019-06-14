@@ -1,15 +1,16 @@
-import { CREATE_USER } from './types';
+import { CREATE_USER, CREATE_USER_FAIL } from './types';
 import axios from 'axios';
 
 const apiUrl = 'http://localhost:8088/api';
 
 export const createUser = (user) => {
-    return (dispatch) => {
-        return axios.post(`${apiUrl}/user`, user)
-            .then(response => dispatch(createUserSuccess(response)))
-            .catch(error => {
-                throw error;
-            })
+    return async (dispatch) => {
+        try {
+            const data = await axios.post(`${apiUrl}/user`, user);
+            dispatch(createUserSuccess(data))
+        } catch (error) {
+            dispatch(createUserFailed(error.response.data))
+        }
     }
 }
 
@@ -18,4 +19,10 @@ export const createUserSuccess = (user) => {
         type: CREATE_USER,
         payload: user
     };
+}
+export const createUserFailed = (error) => {
+    return {
+        type: CREATE_USER_FAIL,
+        payload: error
+    }
 }

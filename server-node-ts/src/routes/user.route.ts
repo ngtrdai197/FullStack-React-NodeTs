@@ -9,9 +9,9 @@ const create = (req: Request, res: Response) => {
     userController.create(req).then(response => {
         return res.send(response);
     }).catch(error => {
-        return res.status(error.status).send({
+        return res.status(error.statusCode).send({
             statusCode: error.status || 500,
-            error: error.message
+            message: error.message
         })
     });
 };
@@ -20,9 +20,9 @@ const findById = (req: Request, res: Response) => {
     userController.findById(req).then(response => {
         return res.send(response);
     }).catch(error => {
-        return res.status(error.status).send({
+        return res.status(error.statusCode).send({
             statusCode: error.status || 500,
-            error: error.message
+            message: error.message
         })
     });
 }
