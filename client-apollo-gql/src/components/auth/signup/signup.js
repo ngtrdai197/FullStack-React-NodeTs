@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
-
-export default class SignUp extends Component {
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { createUser } from '../../../store/actions';
+class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,9 +18,9 @@ export default class SignUp extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         const { username, password, fullname } = this.state;
-        console.log(username);
-        console.log(password);
-        console.log(fullname);
+        const user = {
+            
+        }
     }
 
     render() {
@@ -58,3 +60,9 @@ export default class SignUp extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({ createUser: createUser }, dispatch);
+};
+
+export default SignUp = connect(mapDispatchToProps)(SignUp);
