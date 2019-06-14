@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as mongoose from 'mongoose'
 import * as cors from 'cors';
-// import { userRouter } from './routes';
+import { userRouter } from './routes';
 import { config } from './config';
 
 
@@ -18,9 +18,7 @@ class App {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
         this.app.use(cors());
-        // this.app.use('/api/user', userRouter);
-
-
+        this.app.use('/api/user', userRouter);
     }
 
     private setupMongoDB = () => {
